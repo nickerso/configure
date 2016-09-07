@@ -32,12 +32,9 @@ It may be useful to include some part of the install prefix that is specific to 
 
 * ``.``: various CMake generated files
 * ``Dependencies``: this is the root for all the non-GET projects that are required. Following a successful build this folder can be deleted.
-
     * ``Build``: the build trees for each of the dependencies
     * ``Source``: the source trees for each fo the dependencies
-
 * ``GET``: the top-level folder for the GET projects.
-
     * ``csim``: the source folder for CSim...
     * ``build/CMAKE_BUILD_TYPE``: the build trees for each of the GET projects
 
@@ -57,7 +54,7 @@ or use the appropriate command console from the Visual Studio development tools.
 Visual Studio
 +++++++++++++
 
-Follow these instructions for building 64 bit GET projects from the command line using Visual Studio.
+Follow these instructions for building 64 bit GET projects from the command line using Visual Studio::
 
 $> git clone https://github.com/nickerso/get-configured
 $> mkdir GET_ROOT; cd GET_ROOT
