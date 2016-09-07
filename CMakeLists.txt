@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.2)
+cmake_minimum_required(VERSION 3.3)
 
 project (get-configured NONE)
 
@@ -19,13 +19,13 @@ endif ()
 
 # which of the GET projects and dependencies to be configured
 # default is to build all
-option (CONFIGURE_CSIM "Configure and build CSim" OFF)
-option (CONFIGURE_C2BB "Configure and build CellML-2-BeatBox" OFF)
+option (CONFIGURE_CSIM "Configure and build CSim" ON)
+option (CONFIGURE_C2BB "Configure and build CellML-2-BeatBox" ON)
 option (CONFIGURE_ZLIB "Configure and build zlib dependency" ON)
-option (CONFIGURE_LIBXML2 "Configure and build libxml2 dependency" OFF)
-option (CONFIGURE_LIBCELLML "Configure and build CellML API dependency" OFF)
-option (CONFIGURE_LLVM "Configure and build LLVM dependency" OFF)
-option (CONFIGURE_CLANG "Configure and build Clang dependency" OFF)
+option (CONFIGURE_LIBXML2 "Configure and build libxml2 dependency" ON)
+option (CONFIGURE_LIBCELLML "Configure and build CellML API dependency" ON)
+option (CONFIGURE_LLVM "Configure and build LLVM dependency" ON)
+option (CONFIGURE_CLANG "Configure and build Clang dependency" ON)
 
 
 # Common settings for dependency external projects
