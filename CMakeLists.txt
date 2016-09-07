@@ -54,6 +54,8 @@ set (GET_CMAKE_ARGS
     -DCMAKE_POSITION_INDEPENDENT_CODE=YES # -fPIC flag - always enable
     )
 
+# make it easy to put all the dependencies in the same place
+#
 set_property (DIRECTORY PROPERTY EP_BASE ${DEPENDENCIES_PREFIX})
 
 if (CONFIGURE_ZLIB)
@@ -140,3 +142,37 @@ if (CONFIGURE_CLANG)
 endif ()
 
 if (CONFIGURE_CSIM)
+    ExternalProject_Add (csim
+        DEPENDS ep_clang ep_libcellml
+        GIT_REPOSITORY https://github.com/nickerso/csim
+        GIT_TAG get-configured
+        PREFIX ${GET_PREFIX}
+        STAMP_DIR ${GET_PREFIX}/stamp/csim
+        DOWNLOAD_DIR ${GET_PREFIX}/download/csim
+        SOURCE_DIR ${GET_PREFIX}/csim
+        BINARY_DIR ${GET_PREFIX}/build/${CMAKE_BUILD_TYPE}/csim
+        UPDATE_COMMAND ""
+        PATCH_COMMAND ""
+        BUILD_COMMAND ${CMAKE_COMMAND} --build . ${MULTI_CONFIG_COMMAND_EXT}
+        TEST_COMMAND "ctest"
+        CMAKE_ARGS ${GET_CMAKE_ARGS} -DBUILD_TESTING=ON
+    )
+endif ()
+
+if (CONFIGURE_C2BB)
+    ExternalProject_Add (c2bb
+        DEPENDS csim
+        GIT_REPOSITORY https://github.com/nickerso/c2bb
+        GIT_TAG master
+        PREFIX ${GET_PREFIX}
+        STAMP_DIR ${GET_PREFIX}/stamp/c2bb
+        DOWNLOAD_DIR ${GET_PREFIX}/download/c2bb
+        SOURCE_DIR ${GET_PREFIX}/c2bb
+        BINARY_DIR ${GET_PREFIX}/build/${CMAKE_BUILD_TYPE}/c2bb
+        UPDATE_COMMAND ""
+        PATCH_COMMAND ""
+        BUILD_COMMAND ${CMAKE_COMMAND} --build . ${MULTI_CONFIG_COMMAND_EXT}
+        TEST_COMMAND ""
+        CMAKE_ARGS ${GET_CMAKE_ARGS}
+    )
+endif ()
