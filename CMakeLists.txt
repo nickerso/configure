@@ -19,13 +19,14 @@ endif ()
 
 # which of the GET projects and dependencies to be configured
 # default is to build all
-option (CONFIGURE_CSIM "Configure and build CSim" ON)
-option (CONFIGURE_C2BB "Configure and build CellML-2-BeatBox" ON)
+option (CONFIGURE_CSIM "Configure and build CSim" OFF)
+option (CONFIGURE_C2BB "Configure and build CellML-2-BeatBox" OFF)
 option (CONFIGURE_ZLIB "Configure and build zlib dependency" ON)
 option (CONFIGURE_LIBXML2 "Configure and build libxml2 dependency" ON)
-option (CONFIGURE_LIBCELLML "Configure and build CellML API dependency" ON)
-option (CONFIGURE_LLVM "Configure and build LLVM dependency" ON)
-option (CONFIGURE_CLANG "Configure and build Clang dependency" ON)
+option (CONFIGURE_LIBCELLML "Configure and build CellML API dependency" OFF)
+option (CONFIGURE_LLVM "Configure and build LLVM dependency" OFF)
+option (CONFIGURE_CLANG "Configure and build Clang dependency" OFF)
+option (CONFIGURE_LIBSBML "Configure and build libSBML dependency" ON)
 
 
 # Common settings for dependency external projects
@@ -112,6 +113,23 @@ if (CONFIGURE_LIBCELLML)
             -DENABLE_TELICEMS=OFF
             -DENABLE_VACSS=OFF
             -DENABLE_CGRS=OFF
+    )
+endif ()
+
+if (CONFIGURE_LIBSBML)
+    ExternalProject_Add (ep_libsbml
+        DEPENDS ep_libxml2 ep_zlib
+        GIT_REPOSITORY https://github.com/nickerso/get-libsbml/
+        GIT_TAG libsbml-5.13.0
+        UPDATE_COMMAND ""
+        PATCH_COMMAND ""
+        BUILD_COMMAND ${CMAKE_COMMAND} --build . ${MULTI_CONFIG_COMMAND_EXT}
+        TEST_COMMAND ""
+        CMAKE_ARGS ${DEPENDENCIES_CMAKE_ARGS}
+            -DWITH_CPP_NAMESPACE=ON
+            -DWITH_SWIG=OFF
+            -DWITH_BZIP2=OFF
+            -DLIBSBML_SKIP_SHARED_LIBRARY=TRUE
     )
 endif ()
 
