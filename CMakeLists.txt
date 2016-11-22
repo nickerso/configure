@@ -240,7 +240,7 @@ if (CONFIGURE_GET_SIMULATOR)
     ExternalProject_Add (get-simulator
         DEPENDS csim ep_libsedml ep_sundials
         GIT_REPOSITORY https://github.com/nickerso/get-simulator
-        GIT_TAG get-configured
+        GIT_TAG master
         PREFIX ${GET_PREFIX}
         STAMP_DIR ${GET_PREFIX}/stamp/get-simulator
         DOWNLOAD_DIR ${GET_PREFIX}/download/get-simulator
